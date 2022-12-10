@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16.x"
-        env:
+        env: |
           NODE_ENV: ${{secrets.NODE_ENV}}
           DATABASE_URL: ${{secrets.DATABASE_URL}}
           NEXTAUTH_SECRET: ${{secrets.NEXTAUTH_SECRET}}
