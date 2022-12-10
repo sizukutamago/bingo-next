@@ -18,7 +18,7 @@ jobs:
           node-version: "16.x"
       - run: yarn install
       - name: テストとlint実行
-        run:
+        run: |
           yarn lint
           yarn test
          env:
