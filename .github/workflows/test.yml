@@ -9,6 +9,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NODE_ENV: ${{secrets.NODE_ENV}}
+      DATABASE_URL: ${{secrets.DATABASE_URL}}
+      NEXTAUTH_SECRET: ${{secrets.NEXTAUTH_SECRET}}
+      NEXTAUTH_URL: ${{secrets.NEXTAUTH_URL}}
 
     steps:
       - uses: actions/checkout@v3
@@ -16,11 +21,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16.x"
-        env: |
-          NODE_ENV: ${{secrets.NODE_ENV}}
-          DATABASE_URL: ${{secrets.DATABASE_URL}}
-          NEXTAUTH_SECRET: ${{secrets.NEXTAUTH_SECRET}}
-          NEXTAUTH_URL: ${{secrets.NEXTAUTH_URL}}
       - run: yarn install
       - run: yarn lint
       - run: yarn test
