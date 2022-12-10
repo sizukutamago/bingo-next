@@ -17,10 +17,8 @@ jobs:
         with:
           node-version: "16.x"
       - run: yarn install
-      - name: テストとlint実行
-        run: |
-          yarn lint
-          yarn test
+      - name: テスト実行
+        run: yarn test
         env:
           NODE_ENV: ${{ secrets.NODE_ENV }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
