@@ -3,13 +3,17 @@ import type { FormEvent, ChangeEvent } from "react";
 import { useState } from "react";
 import { trpc } from "../utils/trpc";
 
+const createRoom = (name: string) => {
+  const createRoom = trpc.room.create.useMutation();
+  return createRoom.mutate({ name });
+};
+
 const Home: NextPage = () => {
   const [name, setName] = useState<string>("");
-  const createRoom = trpc.room.create.useMutation();
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    return createRoom.mutate({ name });
+    createRoom(name);
   };
 
   return (
