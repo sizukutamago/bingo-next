@@ -15,12 +15,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
-      - run: yarn install
+          node-version: "18.x"
+      - run: npm install
       - name: テスト実行
-        run: yarn test
-        env:
-          NODE_ENV: ${{ secrets.NODE_ENV }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+        run: npm test

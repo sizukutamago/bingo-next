@@ -1,7 +1,11 @@
 import { type NextPage } from "next";
-import type { FormEvent, ChangeEvent } from "react";
+import type { FormEvent } from "react";
 import { useState } from "react";
 import { trpc } from "../utils/trpc";
+import { Box, Flex, Heading, VStack } from "@chakra-ui/react";
+import { FormControl } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
 
 const createRoom = (name: string) => {
   const createRoom = trpc.room.create.useMutation();
@@ -11,27 +15,41 @@ const createRoom = (name: string) => {
 const Home: NextPage = () => {
   const [name, setName] = useState<string>("");
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = (event: FormEvent<HTMLDivElement>) => {
     event.preventDefault();
     createRoom(name);
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gradient-to-b from-[white] to-[#a9ceec]">
-      <form className="flex flex-col" onSubmit={onSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="ビンゴルームの名前"
-          value={name}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            event.preventDefault();
-            setName(event.target.value);
-          }}
-        />
-        <button type="submit">ビンゴを始める</button>
-      </form>
-    </main>
+    <Box h="100vh" width="100vw">
+      <Flex h="100%" justify="center" align="center">
+        <FormControl w="50%" onSubmit={onSubmit}>
+          <VStack spacing={18}>
+            <Heading as="h1" size="2xl">
+              Bingo Next
+            </Heading>
+            <Input
+              type="text"
+              placeholder="ビンゴルームの名前"
+              name="name"
+              value={name}
+              bg="white"
+              border="2px"
+              width={{ base: "xs", md: "xl" }}
+              borderColor="#919191"
+              textAlign="center"
+              onChange={(event) => {
+                event.preventDefault();
+                setName(event.target.value);
+              }}
+            />
+            <Button type="submit" h="4rem" border="2px" borderColor="#919191">
+              ビンゴを始める
+            </Button>
+          </VStack>
+        </FormControl>
+      </Flex>
+    </Box>
   );
 };
 
