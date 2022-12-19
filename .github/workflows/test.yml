@@ -17,5 +17,7 @@ jobs:
         with:
           node-version: "18.x"
       - run: npm install
+      - name: build実行
+        run: npm run build
       - name: テスト実行
         run: npm test
