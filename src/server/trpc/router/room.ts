@@ -9,7 +9,7 @@ export const roomRouter = router({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      await ctx.prisma.room.create({
+      return await ctx.prisma.room.create({
         data: {
           name: input.name,
         },
